@@ -1,0 +1,17 @@
+@use '@/styles/variables' as *;
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
