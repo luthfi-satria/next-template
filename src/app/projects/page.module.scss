@@ -1,0 +1,12 @@
+@use '@/styles/variables' as *;
+
+.container {
+  h1 {
+    color: $text-color;
+    margin-top: 0;
+  }
+
+  p {
+    color: #64748b;
+  }
+}
