@@ -7,16 +7,13 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-
     "biome:check": "biome check .",
     "biome:write": "biome check --write .",
     "biome:format": "biome format --write .",
-
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-
     "prepare": "husky"
   },
   "dependencies": {
@@ -47,7 +44,8 @@
   "packageManager": "pnpm@10.33.3",
   "lint-staged": {
     "*.{js,ts,jsx,tsx,json,scss}": [
-      "pnpm biome check --write --no-errors-on-unmatched"
+      "pnpm biome check --write --no-errors-on-unmatched",
+      "bash -c 'tsc --noEmit'"
     ]
   }
 }
