@@ -3,12 +3,12 @@
 import DashboardLayout from '@/components/layouts/dashboard-layout';
 import styles from './page.module.scss';
 
-export default function SettingsPage() {
+export default function ComponentsPage() {
   return (
     <DashboardLayout>
       <div className={styles.container}>
-        <h1>Settings</h1>
-        <p>Settings page coming soon...</p>
+        <h1>Components</h1>
+        <p>Components page coming soon...</p>
       </div>
     </DashboardLayout>
   );

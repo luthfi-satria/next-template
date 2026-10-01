@@ -64,7 +64,7 @@ export async function getProfileAction(userId: string): Promise<ActionResult<Use
     }
 
     return { success: true, data: user };
-  } catch (error) {
+  } catch (_error) {
     return { success: false, error: 'Gagal mengambil data user' };
   }
 }

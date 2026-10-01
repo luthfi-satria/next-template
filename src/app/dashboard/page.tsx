@@ -2,7 +2,7 @@
 
 import QuickStatsCard from '@/components/features/dashboard/quick-stats-card';
 import WelcomeCard from '@/components/features/dashboard/welcome-card';
-import { DashboardLayout } from '@/components/layouts/dashboard-layout';
+import DashboardLayout from '@/components/layouts/dashboard-layout';
 import { useAuthStore } from '@/stores/auth-store';
 import styles from './dashboard.module.scss';
 
