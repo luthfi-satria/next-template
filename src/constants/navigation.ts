@@ -8,17 +8,31 @@ export const MAIN_NAVIGATION: NavigationItem[] = [
     icon: '📊',
   },
   {
-    id: 'projects',
-    label: 'Projects',
-    href: '/projects',
-    icon: '📁',
-    badge: 3,
-  },
-  {
-    id: 'analytics',
-    label: 'Analytics',
-    href: '/analytics',
-    icon: '📈',
+    id: 'guide',
+    label: 'Guide',
+    href: '/guide',
+    icon: '📖',
+    children: [
+      {
+        id: 'themes',
+        label: 'Themes & Styles Guide',
+        href: '/themes',
+        icon: '📈',
+      },
+      {
+        id: 'components',
+        label: 'Components',
+        href: '/components',
+        icon: '📁',
+        badge: 3,
+      },
+      {
+        id: 'typography',
+        label: 'Typography',
+        href: '/typography',
+        icon: '🔤',
+      },
+    ],
   },
   {
     id: 'settings',
