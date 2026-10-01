@@ -1,0 +1,43 @@
+{
+  "github.copilot.advanced": {
+    "mcpServers": [
+      {
+        "name": "github",
+        "command": "npx",
+        "args": ["@modelcontextprotocol/server-github"],
+        "env": {
+          "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_TOKEN}"
+        }
+      },
+      {
+        "name": "puppeteer",
+        "command": "node",
+        "args": ["./mcp-servers/puppeteer-server.js"],
+        "env": {
+          "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "false"
+        }
+      },
+      {
+        "name": "supabase",
+        "command": "node",
+        "args": ["./mcp-servers/supabase-server.js"],
+        "env": {
+          "SUPABASE_URL": "${env:SUPABASE_URL}",
+          "SUPABASE_SERVICE_ROLE_KEY": "${env:SUPABASE_SERVICE_ROLE_KEY}",
+          "SUPABASE_ANON_KEY": "${env:SUPABASE_ANON_KEY}"
+        }
+      }
+    ]
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
+}
