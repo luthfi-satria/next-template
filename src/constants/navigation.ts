@@ -26,12 +26,6 @@ export const MAIN_NAVIGATION: NavigationItem[] = [
         icon: '📁',
         badge: 3,
       },
-      {
-        id: 'typography',
-        label: 'Typography',
-        href: '/typography',
-        icon: '🔤',
-      },
     ],
   },
   {

@@ -1,11 +1,11 @@
 import styles from '@/app/themes/page.module.scss';
-import Blocks from '@/components/common/blocks/blocks';
+import Block from '@/components/common/blocks/block';
 import { useThemeStore } from '@/stores/theme-store';
 
 export default function ThemeFilter() {
   const { setActiveTab, activeTab, search, setSearch } = useThemeStore();
   return (
-    <Blocks as="section" className={`div-block ${styles.toolbar}`}>
+    <Block as="section" className={`div-block ${styles.toolbar}`}>
       <div className={styles.tabs}>
         {(['all', 'colors', 'typography', 'spacing', 'elevation'] as const).map((tab) => (
           <button
@@ -27,6 +27,6 @@ export default function ThemeFilter() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-    </Blocks>
+    </Block>
   );
 }
