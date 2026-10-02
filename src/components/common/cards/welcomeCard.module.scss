@@ -1,0 +1,84 @@
+@use "@/styles/variables" as *;
+
+.welcomeCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, $primary-color 0%, #1e40af 100%);
+  border-radius: $border-radius;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  &.primary {
+    background: linear-gradient(135deg, $primary-color 0%, #1e40af 100%);
+  }
+  &.secondary {
+    background: linear-gradient(135deg, $secondary-color 0%, #1e40af 100%);
+  }
+  &.tertiary {
+    background: linear-gradient(135deg, $tertiary-color 0%, #1e40af 100%);
+  }
+  &.outline {
+    background: none;
+    border: 2px solid $primary-color;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+}
+
+.content {
+  z-index: 1;
+  flex: 1;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.5rem;
+  }
+}
+
+.title {
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.decoration {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  position: absolute;
+  right: -100px;
+  top: -50px;
+  pointer-events: none;
+
+  @media (max-width: $breakpoint-md) {
+    width: 200px;
+    height: 200px;
+    right: -50px;
+    top: 50%;
+  }
+}

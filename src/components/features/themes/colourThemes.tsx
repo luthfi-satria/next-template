@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styles from '@/app/themes/page.module.scss';
-import Blocks from '@/components/common/blocks/blocks';
+import Block from '@/components/common/blocks/block';
 import { useThemeStore } from '@/stores/theme-store';
 
 export default function ColourThemes() {
@@ -12,7 +12,7 @@ export default function ColourThemes() {
   }, [filteredColor, setFilteredColor]);
 
   return (
-    <Blocks as="section" className={styles.section}>
+    <Block as="section" className={styles.section}>
       <div className={styles.sectionHeader}>
         <h2>Color Palette</h2>
         <p>Klik pada kartu warna untuk menyalin nama variabel SCSS.</p>
@@ -35,6 +35,6 @@ export default function ColourThemes() {
           </button>
         ))}
       </div>
-    </Blocks>
+    </Block>
   );
 }

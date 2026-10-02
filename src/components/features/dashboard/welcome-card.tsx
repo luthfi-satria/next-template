@@ -1,10 +1,13 @@
+import Block from '@/components/common/blocks/block';
+import Card from '@/components/common/cards/card';
+import WelcomeCard from '@/components/common/cards/welcomeCard';
 import styles from './welcome-card.module.scss';
 
 interface WelcomeCardProps {
   userName: string;
 }
 
-export default function WelcomeCard({ userName }: WelcomeCardProps) {
+export default function DashboardWelcomeCard({ userName }: WelcomeCardProps) {
   const currentHour = new Date().getHours();
   let greeting = 'Good morning';
 
@@ -15,16 +18,11 @@ export default function WelcomeCard({ userName }: WelcomeCardProps) {
   }
 
   return (
-    <div className={styles.welcomeCard}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>
-          {greeting}, <span className={styles.userName}>{userName}</span>! 👋
-        </h1>
-        <p className={styles.subtitle}>
-          Welcome back to your dashboard. Here's what's happening today.
-        </p>
-      </div>
+    <Card className={styles.welcomeCard}>
+      <Block as="div" className={styles.content}>
+        <WelcomeCard title={greeting} content={userName} />
+      </Block>
       <div className={styles.decoration} />
-    </div>
+    </Card>
   );
 }

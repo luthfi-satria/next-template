@@ -1,84 +1,52 @@
-'use client';
+import type React from 'react';
+import Block from '../blocks/block';
+import styles from './input.module.scss';
+import Label from './label';
 
-import { useState } from 'react';
-import styles from '@/app/components/page.module.scss';
-import Heading from '@/components/common/headings/heading';
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  error?: boolean;
+  errorText?: string;
+  helperText?: string;
+  label?: string;
+};
 
-export default function InputShowcase() {
-  const [inputValue, setInputValue] = useState('');
-  const [inputError, setInputError] = useState(false);
+export default function Input({
+  error = false,
+  errorText,
+  helperText,
+  label,
+  className = '',
+  id,
+  disabled,
+  ...props
+}: InputProps) {
+  const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
+
+  const inputClasses = [styles.input, error ? styles.error : '', className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <section className={styles.section}>
-      <Heading as="h2" variant="medium" className={styles.sectionTitle}>
-        Input Components
-      </Heading>
+    <Block as="div" className={styles.inputWrapper}>
+      {label && (
+        <Label htmlFor={inputId} className={styles.label}>
+          {label}
+        </Label>
+      )}
 
-      <div className={styles.componentGrid}>
-        <div className={styles.componentCard}>
-          <div className={styles.componentLabel}>Input - Default</div>
-          <div className={styles.componentContent}>
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="Enter text..."
-              value={inputValue}
-              onChange={(e) => {
-                setInputValue(e.target.value);
-                setInputError(false);
-              }}
-            />
-          </div>
-        </div>
+      <input id={inputId} disabled={disabled} className={inputClasses} {...props} />
 
-        <div className={styles.componentCard}>
-          <div className={styles.componentLabel}>Input - With Error</div>
-          <div className={styles.componentContent}>
-            <div>
-              <input
-                type="text"
-                className={`${styles.input} ${styles.error}`}
-                placeholder="Invalid input..."
-                onClick={() => setInputError(true)}
-              />
-              {inputError && <div className={styles.errorText}>This field is required</div>}
-            </div>
-          </div>
-        </div>
+      {error && errorText && (
+        <Block as="div" className={styles.errorText}>
+          {errorText}
+        </Block>
+      )}
 
-        <div className={styles.componentCard}>
-          <div className={styles.componentLabel}>Input - Disabled</div>
-          <div className={styles.componentContent}>
-            <input type="text" className={styles.input} placeholder="Disabled input..." disabled />
-          </div>
-        </div>
-
-        <div className={styles.componentCard}>
-          <div className={styles.componentLabel}>Input - With Value</div>
-          <div className={styles.componentContent}>
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="With value"
-              defaultValue="Sample value"
-            />
-          </div>
-        </div>
-
-        <div className={styles.componentCard}>
-          <div className={styles.componentLabel}>Input - Email</div>
-          <div className={styles.componentContent}>
-            <input type="email" className={styles.input} placeholder="your@email.com" />
-          </div>
-        </div>
-
-        <div className={styles.componentCard}>
-          <div className={styles.componentLabel}>Input - Password</div>
-          <div className={styles.componentContent}>
-            <input type="password" className={styles.input} placeholder="••••••••" />
-          </div>
-        </div>
-      </div>
-    </section>
+      {!error && helperText && (
+        <Block as="div" className={styles.helperText}>
+          {helperText}
+        </Block>
+      )}
+    </Block>
   );
 }
