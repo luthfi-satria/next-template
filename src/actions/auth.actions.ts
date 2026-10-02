@@ -2,6 +2,7 @@
 
 import bcrypt from 'bcryptjs';
 import { eq } from 'drizzle-orm';
+import { cookies } from 'next/headers';
 import { db } from '@/lib/db';
 import { users } from '@/lib/db/schema';
 import { type LoginInput, loginSchema, type RegisterInput, registerSchema } from '@/lib/zod/auth';
@@ -102,11 +103,34 @@ export async function loginAction(input: LoginInput): Promise<ActionResult<UserS
       role: user.role,
     };
 
+    // Set auth cookie
+    const cookieStore = await cookies();
+    cookieStore.set('auth-token', user.id, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
+
     return { success: true, data: userData };
   } catch (error) {
     if (error instanceof Error) {
       return { success: false, error: error.message };
     }
     return { success: false, error: 'Gagal melakukan login' };
+  }
+}
+
+// Action Logout
+export async function logoutAction(): Promise<ActionResult<null>> {
+  try {
+    const cookieStore = await cookies();
+    cookieStore.delete('auth-token');
+    return { success: true, data: null };
+  } catch (error) {
+    if (error instanceof Error) {
+      return { success: false, error: error.message };
+    }
+    return { success: false, error: 'Gagal melakukan logout' };
   }
 }

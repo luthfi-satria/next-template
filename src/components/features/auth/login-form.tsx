@@ -36,9 +36,11 @@ export function LoginForm() {
       if (result.success) {
         // Set user in auth store
         setUser(result.data);
-        // Set auth cookie (server action should handle this)
+        // Cookie is set by server action (auth.actions.ts)
         // Redirect to dashboard
-        router.push('/dashboard');
+        setTimeout(() => {
+          router.push('/dashboard');
+        }, 100);
       } else {
         setError(result.error);
       }
