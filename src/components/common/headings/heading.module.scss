@@ -1,0 +1,28 @@
+@use "@/styles/variables" as *;
+
+.heading {
+  font-family: $font-family-heading;
+  line-height: $line-height-heading;
+  margin-bottom: $margin-bottom-small;
+  &--extra-large {
+    font-size: $font-size-extra-large;
+  }
+  &--large {
+    font-size: $font-size-large;
+  }
+  &--medium {
+    font-size: $font-size-medium;
+  }
+  &--small {
+    font-size: $font-size-small;
+  }
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+  &--semi-bold {
+    font-weight: $font-weight-semi-bold;
+  }
+  &--light {
+    font-weight: $font-weight-light;
+  }
+}

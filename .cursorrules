@@ -1,0 +1,72 @@
+# PROJECT CONTEXT & TECH STACK
+
+You are an expert full-stack engineer working on a high-performance Next.js 15 web application.
+Always adhere to the architectural patterns, libraries, and coding standards defined below.
+
+## Core Stack
+- Framework: Next.js 15 (App Router, React 19 with React Compiler)
+- Global State: Zustand
+- Database & ORM: PostgreSQL with Drizzle ORM
+- Styling: SCSS Modules (`*.module.scss`) + Global SCSS
+- Validation: Zod
+- Data Fetching & State: TanStack Query v5 + Next.js Server Actions
+- Form Handling: React Hook Form + @hookform/resolvers/zod
+- Linter & Formatter: Biome (No ESLint/Prettier)
+- Code Hygiene: TypeScript strict mode enabled
+
+# DIRECTORY & FOLDER STRUCTURE RULES
+
+Strictly follow this folder organization. Do not place files outside their designated paths:
+
+- `src/actions/`: Next.js Server Actions (`'use server'`). Divided by domain/feature.
+- `src/app/`: App Router pages, layouts, loading, and error boundaries only. Keep route files thin.
+- `src/components/common/`: Reusable, domain-agnostic UI primitives (e.g., Buttons, Inputs, Modals).
+- `src/components/features/<feature>/`: Domain-specific components (e.g., `auth/LoginForm.tsx`, `dashboard/MetricCard.tsx`).
+- `src/components/providers/`: React Context and Query Client providers.
+- `src/constants/`: App-wide static constants, route paths, config keys, and lookup options.
+- `src/hooks/`: Reusable client-side React hooks.
+- `src/lib/db/`: Drizzle ORM client, schemas (`schema.ts`), and DB helpers.
+- `src/lib/zod/`: Shared Zod validation schemas.
+- `src/stores/`: Zustand store definitions for client-side global state.
+- `src/styles/`: SCSS architecture (`_variables.scss`, `_mixins.scss`, `globals.scss`, `_theme.scss`).
+- `src/types/`: Global TypeScript interfaces, utility types, and API contract declarations.
+
+# CODING STANDARDS & GUIDELINES
+
+## 1. React 19 & React Compiler Rules
+- **DO NOT** use `useMemo`, `useCallback`, or `React.memo` unless explicitly requested. The React Compiler handles memoization automatically at build time.
+- Write clean, standard JavaScript/TypeScript React code without manual optimization overhead.
+- Default to **Server Components** (`src/app/...`). Only add `'use client'` at the top of the file when browser APIs, DOM events, or client hooks (`useState`, `useEffect`) are strictly necessary.
+
+## 2. Component & Styling Rules (SCSS Modules)
+- Always use **SCSS Modules** for component styling (`ComponentName.module.scss`).
+- Import SCSS variables and mixins using `@use '@/styles/variables' as *;` or `@use '@/styles/mixins' as *;`.
+- Use `clsx` or `classnames` for conditional class joining:
+  ```tsx
+  import clsx from 'clsx';
+  import styles from './button.module.scss';
+
+  export function Button({ variant, children }: ButtonProps) {
+    return (
+      <button className={clsx(styles.btn, styles[variant])}>
+        {children}
+      </button>
+    );
+  }
+
+## 3. Global State Management (Zustand)
+- Use **Zustand** ONLY for client-side global UI states (e.g., sidebar collapse, modal open states, user session flags, active filters).
+- DO NOT use Zustand to store server data/cache (use **TanStack Query** for server state).
+- Always define stores inside `src/stores/<store-name>.ts` with explicit TypeScript interface definitions:
+  ```typescript
+  import { create } from 'zustand';
+
+  interface SidebarStore {
+    isOpen: boolean;
+    toggleSidebar: () => void;
+  }
+
+  export const useSidebarStore = create<SidebarStore>((set) => ({
+    isOpen: true,
+    toggleSidebar: () => set((state) => ({ isOpen: !state.isOpen })),
+  }));
